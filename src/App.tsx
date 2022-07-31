@@ -1,14 +1,17 @@
 import { Route, Routes } from "react-router-dom"
 import { routerConfig } from "./routes"
+import Layout from '@/components/layout';
 
 const App = () => {
   return (
     <>
-      <Routes>
-        {routerConfig.map(({ path, component: Component }) => (
-          <Route path={path} key={path} element={<Component />} />
-        ))}
-      </Routes>
+      <Layout>
+        <Routes>
+          {routerConfig.map(({ path, component: Component }) => (
+            <Route path={path} key={path} element={<Component />} />
+          ))}
+        </Routes>
+      </Layout>
     </>
   )
 }
