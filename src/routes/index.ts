@@ -5,7 +5,7 @@ import PromotionList from '@/pages/list';
 export enum ROUTE_PATH {
   HOME = '/',
   PROMOTION_LIST = '/promotions',
-  PROMOTION_DETAIL = '/promotion/:id',
+  PROMOTION_DETAIL = '/promotion',
 }
 
 interface IRoute {

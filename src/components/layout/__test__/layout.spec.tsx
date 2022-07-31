@@ -1,5 +1,5 @@
 import { ROUTE_PATH } from '@/routes';
-import { render, cleanup, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '..';
 
@@ -35,9 +35,7 @@ describe('layout', () => {
         </Routes>
       </Layout>
     </BrowserRouter>);
-    await waitFor(() => {
-      fireEvent.click(getByText('Promotion List'));
-    });
+    fireEvent.click(getByText('Promotion List'));
     expect(global.window.location.pathname).toEqual('/promotions');
     expect(screen.queryByText('list')).toBeInTheDocument();
     expect(screen.queryByText('home')).not.toBeInTheDocument();

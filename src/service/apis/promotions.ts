@@ -1,5 +1,5 @@
-import http from '..'
+import request from '..'
 
 export const getPromotions = () => {
-  return http.get('/promotions');
+  return request.get('/promotions');
 }
