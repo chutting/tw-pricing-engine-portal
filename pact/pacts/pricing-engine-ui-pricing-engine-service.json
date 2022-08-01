@@ -1,0 +1,47 @@
+{
+  "consumer": {
+    "name": "pricing-engine-ui"
+  },
+  "interactions": [
+    {
+      "description": "a request to get Promotions",
+      "providerState": "there are promotions",
+      "request": {
+        "method": "GET",
+        "path": "/promotions"
+      },
+      "response": {
+        "body": [
+          {
+            "description": "description",
+            "endDate": "1996-06-13 06:34:36",
+            "id": "1",
+            "spec": 3,
+            "startDate": "1978-03-02 23:46:02",
+            "title": "title",
+            "type": "DISCOUNT"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "10.0.1"
+    },
+    "pactRust": {
+      "ffi": "0.2.4",
+      "models": "0.3.1"
+    },
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  },
+  "provider": {
+    "name": "pricing-engine-service"
+  }
+}
