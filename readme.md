@@ -28,9 +28,9 @@
 > 
 > - 参考设计图：[Figma](https://www.figma.com/file/XzZ0cvReNkOndjFVyM6USG/pojian?node-id=0%3A1)（表单和表格的样式可以自己设计）
 > 
-> - api可以用DDD的作业，也可以用 MockServer 提供api （ 如 [yapi](http://yapi.smart-xwork.cn/)等，不做限制）
+> - api可以用DDD的作业，也可以用 MockServer 提供api （ 如 swagger, json-server, [yapi](http://yapi.smart-xwork.cn/)等，不做限制）
 
-# 第一周作业（html + css）：
+# 第一迭代作业（html + css）：
 
 首页
 
@@ -40,12 +40,16 @@
 
 - 点击create promotion按钮可以跳转到创建页面
 
-# 第二周作业（js）：
+# 第二迭代作业（js）：
 
-完成创建表单和表单展示
+完成创建表单和表单展示（包括筛选）
 
 - 表单的展示和筛选
 
 - 点击title跳转到详情页面
 
 - 创建和详情页，可以修改提交
+
+- 调用后端ap
+
+- 测试
