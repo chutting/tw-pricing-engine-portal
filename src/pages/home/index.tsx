@@ -1,7 +1,10 @@
+import cover from '@/assets/home-cover.png';
+import styles from './index.module.less';
+
 const Home = () => {
   return (
     <div>
-      Home
+      <img src={cover} className={styles.cover} />
     </div>
   )
 }
