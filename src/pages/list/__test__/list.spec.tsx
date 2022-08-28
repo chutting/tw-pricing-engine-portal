@@ -1,4 +1,5 @@
-import { render, cleanup, screen, waitFor, fireEvent } from '@testing-library/react';
+import { promotionType, promotionTypeMap } from '@/constants/promotion';
+import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import PromotionList from '..';
 
@@ -25,49 +26,19 @@ jest.mock('@/service/apis/promotions', () => ({
   }),
 }))
 
-jest.mock('react-router-dom', () => {
-  const reactRouterDom = jest.requireActual('react-router-dom');
-  return {
-    ...reactRouterDom,
-    useLocation: () => ({
-      pathname: '/promotions',
-    }),
-  };
-});
-
-describe('layout', () => {
+describe('promotion list', () => {
   afterEach(cleanup);
 
-  it('should show table', () => {
-    render(<BrowserRouter>
-      <PromotionList />
-    </BrowserRouter>);
-    expect(screen.queryByText('Id')).toBeInTheDocument();
-    expect(screen.queryByText('Title')).toBeInTheDocument();
-    expect(screen.queryByText('StartDate')).toBeInTheDocument();
-    expect(screen.queryByText('EndDate')).toBeInTheDocument();
-    expect(screen.queryByText('Type')).toBeInTheDocument();
-    expect(screen.queryByText('Description')).toBeInTheDocument();
-
+  it('should show promotions whose type is match filter',async () => {
+    const { getByText } = render(<BrowserRouter><PromotionList /></BrowserRouter>);
     waitFor(() => {
-      expect(screen.queryByText('440000200306196164')).toBeInTheDocument();
-      expect(screen.queryByText('qc0')).toBeInTheDocument();
-      expect(screen.queryByText('UfuQJ')).toBeInTheDocument();
-      expect(screen.queryByText('1978-03-02 23:46:02')).toBeInTheDocument();
-      expect(screen.queryByText('DEDUCTION')).toBeInTheDocument();
-      expect(screen.queryByText('2000-12-31 11:29:26')).toBeInTheDocument();
+      expect(screen.queryByText('510000198102170913')).toBeInTheDocument()
+    })
+    fireEvent.click(getByText(promotionTypeMap[promotionType.discount]));
+    expect(screen.queryByText('510000198102170913')).not.toBeInTheDocument();
+    fireEvent.click(getByText(promotionTypeMap[promotionType.all]))
+    waitFor(() => {
+      expect(screen.queryByText('510000198102170913')).toBeInTheDocument()
     })
   });
-
-  it('should go to detail page when click title', async() => {
-    render(
-      <BrowserRouter>
-        <PromotionList />
-      </BrowserRouter>
-    );
-    await waitFor(() => {
-      fireEvent.click(screen.getByText('qc0'));
-      expect(global.window.location.pathname).toEqual('/promotion');
-    })
-  })
 })

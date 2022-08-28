@@ -1,56 +1,27 @@
-import { ROUTE_PATH } from "@/routes";
+import { useEffect, useMemo, useState } from "react";
 import { getPromotions } from "@/service/apis/promotions";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import PromotionTable from "./components/table";
+import PromotionFilter from "./components/filter";
+import { promotionType } from "@/constants/promotion";
+import styles from './index.module.less';
+
 
 const PromotionList = () => {
   const [data, setData] = useState([]);
+  const [type, setType] = useState<promotionType>(promotionType.all);
   useEffect(() => {
     getPromotions().then(({data}) => {
       setData(data);
     });
   }, [])
-  const fields = [
-    {
-      key: 'id',
-      header: 'Id',
-    },
-    {
-      key: 'title',
-      header: 'Title',
-    },
-    {
-      key: 'startDate',
-      header: 'StartDate',
-    },
-    {
-      key: 'endDate',
-      header: 'EndDate',
-    },
-    {
-      key: 'type',
-      header: 'Type',
-    },
-    {
-      key: 'description',
-      header: 'Description',
-    },
-  ]
+
+  const filteredData = useMemo(() => type === promotionType.all ? data : data.filter(({ type: _type }) => _type === type), [data, type]);
+
   return (
-    <table>
-      <thead>
-        <tr>
-          {fields.map(({ header }) => <th key={header}>{header}</th>)}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((_data, index) => (
-          <tr key={index}>
-            {fields.map(({ key }) => <th key={key}>{key === 'title' ? <Link to={`${ROUTE_PATH.PROMOTION_DETAIL}?id=${_data.id}`}>{_data[key]}</Link> : _data[key]}</th>)}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className={styles.promotionList}>
+      <PromotionFilter onChange={setType} />
+      <PromotionTable data={filteredData} />
+    </div>
   )
 }
 

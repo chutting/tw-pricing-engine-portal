@@ -2,16 +2,6 @@ import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/re
 import { BrowserRouter } from 'react-router-dom';
 import Home from '..';
 
-// jest.mock('react-router-dom', () => {
-//   const reactRouterDom = jest.requireActual('react-router-dom');
-//   return {
-//     ...reactRouterDom,
-//     useLocation: () => ({
-//       pathname: '/',
-//     }),
-//   };
-// });
-
 describe('home', () => {
   afterEach(cleanup);
 
