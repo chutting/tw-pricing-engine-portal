@@ -1,4 +1,4 @@
-import { render, cleanup, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import PromotionTable from '..';
 
@@ -37,25 +37,21 @@ describe('promotion table', () => {
     expect(screen.queryByText('Type')).toBeInTheDocument();
     expect(screen.queryByText('Description')).toBeInTheDocument();
 
-    waitFor(() => {
-      expect(screen.queryByText('440000200306196164')).toBeInTheDocument();
-      expect(screen.queryByText('qc0')).toBeInTheDocument();
-      expect(screen.queryByText('UfuQJ')).toBeInTheDocument();
-      expect(screen.queryByText('1978-03-02 23:46:02')).toBeInTheDocument();
-      expect(screen.queryByText('DEDUCTION')).toBeInTheDocument();
-      expect(screen.queryByText('2000-12-31 11:29:26')).toBeInTheDocument();
-    })
+    expect(screen.queryByText('440000200306196164')).toBeInTheDocument();
+    expect(screen.queryByText('qc0')).toBeInTheDocument();
+    expect(screen.queryByText('UfuQJ')).toBeInTheDocument();
+    expect(screen.queryByText('1978-03-02 23:46:02')).toBeInTheDocument();
+    expect(screen.queryByText('DEDUCTION')).toBeInTheDocument();
+    expect(screen.queryByText('2000-12-31 11:29:26')).toBeInTheDocument();
   });
 
-  it('should go to detail page when click title', async () => {
+  it('should go to detail page when click title', () => {
     render(
       <BrowserRouter>
         <PromotionTable data={data} />
       </BrowserRouter>
     );
-    await fireEvent.click(screen.getByText('qc0'));
-    waitFor(() => {
-      expect(global.window.location.pathname).toEqual('/promotion-detail/440000200306196164');
-    })
+    fireEvent.click(screen.getByText('qc0'));
+    expect(global.window.location.pathname).toEqual('/promotion-detail/440000200306196164');
   })
 })

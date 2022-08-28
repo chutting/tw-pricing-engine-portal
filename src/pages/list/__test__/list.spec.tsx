@@ -31,7 +31,7 @@ describe('promotion list', () => {
 
   it('should show promotions whose type is match filter',async () => {
     const { getByText } = render(<BrowserRouter><PromotionList /></BrowserRouter>);
-    waitFor(() => {
+    await waitFor(() => {
       expect(screen.queryByText('510000198102170913')).toBeInTheDocument()
     })
     fireEvent.click(getByText(promotionTypeMap[promotionType.discount]));
