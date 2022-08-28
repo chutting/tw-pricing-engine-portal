@@ -8,7 +8,7 @@ module.exports = {
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/(*.)+(spec|test).[tj]s?(x)'],
   moduleFileExtensions: ['js', 'ts', 'tsx'],
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/tests/setup-env.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setup-env.ts'],
   moduleNameMapper: {
     '\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/__mocks__/fileMock.js',

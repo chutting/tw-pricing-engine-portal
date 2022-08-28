@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 
 beforeAll(() => {
   Object.defineProperty(window, 'matchMedia', {
@@ -15,3 +17,10 @@ beforeAll(() => {
   });
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
 });
+
+export function setup(jsx) {
+  return {
+    user: userEvent.setup(),
+    ...render(jsx),
+  }
+}
