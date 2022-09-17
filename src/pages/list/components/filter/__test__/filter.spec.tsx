@@ -1,4 +1,4 @@
-import { promotionType, promotionTypeMap } from '@/constants/promotion';
+import { PromotionType, promotionTypeMap } from '@/constants/promotion';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import PromotionFilter from '..';
 
@@ -9,7 +9,7 @@ describe('promotion filter', ()=> {
     const handleChange = jest.fn()
     const { getByText } = render(<PromotionFilter onChange={handleChange} />)
 
-    fireEvent.click(getByText(promotionTypeMap[promotionType.discount]));
-    expect(handleChange).toBeCalledWith(promotionType.discount)
+    fireEvent.click(getByText(promotionTypeMap[PromotionType.discount]));
+    expect(handleChange).toBeCalledWith(PromotionType.discount)
   });
 })

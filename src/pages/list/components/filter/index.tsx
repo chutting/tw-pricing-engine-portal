@@ -1,16 +1,18 @@
 import Button from "@/components/button";
-import { promotionType, promotionTypeMap } from "@/constants/promotion";
+import { PromotionType, promotionTypeMap } from "@/constants/promotion";
 import styles from './index.module.less';
 
+const filters = ['ALL', PromotionType.discount, PromotionType.reduction]
+
 interface IProps {
-  onChange: (type: promotionType) => void;
+  onChange: (type: string) => void;
 }
 
 const PromotionFilter = ({ onChange }: IProps) => {
   return (
     <div className={styles.promotionFilters}>
-      {Object.values(promotionType).map((filter) => (
-        <Button key={filter} onClick={() => onChange(filter)}>{promotionTypeMap[filter]}</Button>
+      {filters.map((filter) => (
+        <Button key={filter} onClick={() => onChange(filter)}>{promotionTypeMap[filter] ?? 'All'}</Button>
       ))}
     </div>
   )

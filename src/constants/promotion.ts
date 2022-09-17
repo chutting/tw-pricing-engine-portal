@@ -1,11 +1,9 @@
-export enum promotionType {
-  all = 'ALL',
+export enum PromotionType {
   discount = 'DISCOUNT',
   reduction = 'REDUCTION'
 }
 
 export const promotionTypeMap = {
-  [promotionType.all]: 'All',
-  [promotionType.discount]: 'Discount Type',
-  [promotionType.reduction]: 'Reduction Type',
+  [PromotionType.discount]: 'Discount Type',
+  [PromotionType.reduction]: 'Reduction Type',
 }

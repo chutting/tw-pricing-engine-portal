@@ -1,4 +1,4 @@
-import { promotionType, promotionTypeMap } from '@/constants/promotion';
+import { PromotionType, promotionTypeMap } from '@/constants/promotion';
 import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import PromotionList from '..';
@@ -34,9 +34,9 @@ describe('promotion list', () => {
     await waitFor(() => {
       expect(screen.queryByText('510000198102170913')).toBeInTheDocument()
     })
-    fireEvent.click(getByText(promotionTypeMap[promotionType.discount]));
+    fireEvent.click(getByText(promotionTypeMap[PromotionType.discount]));
     expect(screen.queryByText('510000198102170913')).not.toBeInTheDocument();
-    fireEvent.click(getByText(promotionTypeMap[promotionType.all]))
+    fireEvent.click(getByText('All'))
     waitFor(() => {
       expect(screen.queryByText('510000198102170913')).toBeInTheDocument()
     })
