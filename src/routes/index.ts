@@ -6,7 +6,7 @@ export enum ROUTE_PATH {
   HOME = '/',
   PROMOTION_LIST = '/promotions',
   PROMOTION_CREATE = '/promotion-create',
-  PROMOTION_DETAIL = '/promotion-detail/:id',
+  PROMOTION_DETAIL = '/promotion-detail',
 }
 
 interface IRoute {

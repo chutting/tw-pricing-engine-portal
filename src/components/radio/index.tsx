@@ -7,14 +7,14 @@ interface IProps {
   onChange?: (value: string | boolean) => void
 }
 
-const Radio = ({ checked, label, onChange }: IProps) => {
+const Radio = ({ checked, label, onChange, value }: IProps) => {
   const handleChange = (e) => {
     onChange(e.target.checked);
   }
   return (
     <div>
-      <input onChange={handleChange} type="radio" checked={checked} />
-      <label>{label}</label>
+      <input onChange={handleChange} id={value.toString()} type="radio" checked={checked} />
+      <label htmlFor={value.toString()}>{label}</label>
     </div>
   )
 }

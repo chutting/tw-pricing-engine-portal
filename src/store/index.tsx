@@ -1,22 +1,19 @@
-import { createContext, useContext, useReducer } from 'react'
-import reducer, { IState } from './reducer'
-import { Action } from './action'
+import { configureStore } from '@reduxjs/toolkit';
+import promotionSlice from './slices/promotionSlice';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-export const initState: IState = {}
+export const store = configureStore({
+  reducer: {
+    promotions: promotionSlice.reducer,
+  },
+});
 
-const StateContext = createContext(initState)
-const DispatchContext = createContext((() => 0) as React.Dispatch<Action>)
-
-export default ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initState)
-
-  return (
-    <DispatchContext.Provider value={dispatch}>
-      <StateContext.Provider value={state}>{children}</StateContext.Provider>
-    </DispatchContext.Provider>
-  )
+export const storeActions = {
+  promotions: promotionSlice.actions
 }
 
-export const useGlobalDispatch = () => useContext(DispatchContext)
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 
-export const useGlobalState = () => useContext(StateContext)
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

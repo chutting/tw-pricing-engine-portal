@@ -9,7 +9,7 @@ import { ROUTE_PATH } from '@/routes';
 
 const Home = () => {
   const [cardsConfig, setCardsConfig] = useState<CardConfig[]>([])
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     getHomeCardsInfo().then(setCardsConfig)
   }, [])

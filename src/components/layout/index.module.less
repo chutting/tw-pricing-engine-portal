@@ -1,15 +1,21 @@
 @import '@/styles/variables.less';
 
 .header {
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px 30px;
+  background-color: @white-color;
+  z-index: 10;
   .logo {
     position: absolute;
     left: 20px;
     height: 24px;
+    cursor: pointer;
   }
 
   .navBar {
@@ -20,6 +26,10 @@
       padding-bottom: 8px;
     }
   }
+}
+
+.main {
+  margin-top: 90px;
 }
 
 .active {

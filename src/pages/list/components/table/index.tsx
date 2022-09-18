@@ -1,5 +1,7 @@
-import { IPromotion } from "@/typings/promotion";
-import { Link } from "react-router-dom";
+import { ROUTE_PATH } from "@/routes";
+import { storeActions, useAppDispatch } from "@/store";
+import { IPromotionDetail } from "@/typings/promotion";
+import { useNavigate } from "react-router-dom";
 import styles from './index.module.less';
 
 const fieldsConfig = [
@@ -30,10 +32,17 @@ const fieldsConfig = [
 ]
 
 interface IProps {
-  data: IPromotion[]
+  data: IPromotionDetail[]
 }
 
 const PromotionTable = ({ data }: IProps) => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const goToPromotionDetail = (data: IPromotionDetail) => {
+    dispatch(storeActions.promotions.setPromotion(data))
+    navigate(ROUTE_PATH.PROMOTION_DETAIL)
+  }
   return (
     <table>
       <thead>
@@ -43,13 +52,10 @@ const PromotionTable = ({ data }: IProps) => {
       </thead>
       <tbody>
         {data.map((_data, index) => (
-          <tr key={index}>
+          <tr key={index} onClick={() => goToPromotionDetail(_data)} className={styles.row}>
             {fieldsConfig.map(({ key }) => (
               <th key={key} className={styles.cell}>
-                {key === 'title' ?
-                  <Link to={`/promotion-detail/${_data.id}`}>{_data[key]}</Link> :
-                  _data[key]
-                }
+                {_data[key]}
               </th>
             ))}
           </tr>

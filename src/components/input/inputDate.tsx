@@ -1,4 +1,5 @@
 import cls from "classnames";
+import { useEffect, useState } from "react";
 import styles from './index.module.less';
 
 interface IProps {
@@ -7,10 +8,16 @@ interface IProps {
   min?: string
   className?: string;
   placeholder?: string
-  value: string
+  defaultValue: string
 }
 
-const InputDate = ({ className, onChange, max, min, placeholder = '', value }: IProps) => {
+const InputDate = ({ className, onChange, max, min, placeholder = '', defaultValue }: IProps) => {
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    defaultValue && setValue(defaultValue)
+  }, [defaultValue])
+  
   const handleChange = (e) => {
     onChange(e.target.value)
   }

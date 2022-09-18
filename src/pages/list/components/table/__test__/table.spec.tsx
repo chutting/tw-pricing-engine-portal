@@ -1,3 +1,4 @@
+import { IPromotionDetail } from '@/typings/promotion';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import PromotionTable from '..';
@@ -19,7 +20,7 @@ const data = [
     title: "1Sk",
     type: "DEDUCTION",
   }
-]
+] as IPromotionDetail[]
 
 describe('promotion table', () => {
   afterEach(cleanup);

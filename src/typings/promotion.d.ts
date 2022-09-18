@@ -1,15 +1,16 @@
 import { PromotionType } from "@/constants/promotion";
 
-interface IPromotion {
-  id: string;
-  title: string;
-  startDate: string;
-  endDate: string;
-  type: string;
-  description: string;
-}
+// interface IPromotion {
+//   id: string;
+//   title: string;
+//   startDate: string;
+//   endDate: string;
+//   type: string;
+//   description: string;
+// }
 
 interface IPromotionDetail {
+  id?: string;
   title: string;
   priority: number;
   startDate: string;
@@ -19,6 +20,6 @@ interface IPromotionDetail {
   type: PromotionType;
   vipOnly: boolean;
   discountRate?: number;
-  maxAccount?: number;
-  reduceAcount?: number;
+  maxAmount?: number;
+  reduceAmount?: number;
 }

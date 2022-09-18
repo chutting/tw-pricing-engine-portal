@@ -1,4 +1,4 @@
-import Field from "@/components/form"
+import Field from "@/components/field"
 import Input from "@/components/input"
 import InputDate from "@/components/input/inputDate"
 import InputNumerical from "@/components/input/inputNumerical"
@@ -33,24 +33,18 @@ export const Title = ({ onChange, defaultValue, onChangeValidateState }: {
 }
 
 export const Priority = ({ onChange, defaultValue }) => {
-  const [value, setValue] = useState<string>(defaultValue)
-  useEffect(() => {
-    setValue(defaultValue)
-  }, [defaultValue]);
-
   const handleChange = (value) => {
-    setValue(value)
     onChange({ priority: value })
   }
 
   return (
     <Field label="Priority">
-      <InputNumerical onChange={handleChange} defaultValue={value} max={10} min={0} />
+      <InputNumerical onChange={handleChange} defaultValue={defaultValue} max={10} min={0} />
     </Field>
   )
 }
 
-export const StartDate = ({ onChange, defaultValue }) => {
+export const StartDate = ({ onChange, defaultValue, endDate }) => {
   const [value, setValue] = useState<string>(defaultValue)
   useEffect(() => {
     setValue(defaultValue)
@@ -63,13 +57,13 @@ export const StartDate = ({ onChange, defaultValue }) => {
 
   return (
     <Field label="StartDate">
-      <InputDate onChange={handleChange} value={value} />
+      <InputDate onChange={handleChange} defaultValue={value} max={endDate} />
     </Field>
   )
 }
 
 
-export const EndDate = ({ onChange, defaultValue }) => {
+export const EndDate = ({ onChange, defaultValue, startDate }) => {
   const [value, setValue] = useState<string>(defaultValue)
   useEffect(() => {
     setValue(defaultValue)
@@ -82,7 +76,7 @@ export const EndDate = ({ onChange, defaultValue }) => {
 
   return (
     <Field label="EndDate">
-      <InputDate onChange={handleChange} value={value} />
+      <InputDate onChange={handleChange} defaultValue={value} min={startDate} />
     </Field>
   )
 }
@@ -100,7 +94,7 @@ export const Enabled = ({ onChange, defaultValue }) => {
 
   return (
     <Field label="Enabled">
-      <Radio.Group onChange={handleChange} value={value}>
+      <Radio.Group onChange={handleChange} defaultValue={value}>
         <Radio value={true} label="Yes" />
         <Radio value={false} label="No" />
       </Radio.Group>
@@ -138,10 +132,48 @@ export const DiscountType = ({ onChange, defaultValue }) => {
 
   return (
     <Field label="Discount Type">
-      <Select value={value} onChange={handleChange}>
+      <Select defaultValue={value} onChange={handleChange}>
         <Select.Option label="discount" value={PromotionType.discount} />
         <Select.Option label="reduction" value={PromotionType.reduction} />
       </Select>
+    </Field>
+  )
+}
+
+export const DiscountRate = ({ defaultValue, onChange, onChangeValidateState }) => {
+  const [value, setValue] = useState(defaultValue)
+  const handleChangeValidateState = (validateState: boolean) => {
+    onChangeValidateState({ discountRate: validateState })
+  }
+  const { errorCode } = useValidate({ value, onChangeValidateState: handleChangeValidateState, config: [ValidateConfig.REQUIRED] })
+  const handleChange = (value) => {
+    setValue(value)
+    onChange({ discountRate: value })
+  }
+  return (
+    <Field label="Discount Rate" errorCode={errorCode}>
+      <InputNumerical onChange={handleChange} defaultValue={defaultValue} max={10} min={0} />
+    </Field>
+  )
+}
+
+export const MaxAmount = ({ defaultValue, onChange, min }) => {
+  const handleChange = (value) => {
+    onChange({ maxAmount: value })
+  }
+  return (
+    <Field label="Max Amount">
+      <InputNumerical onChange={handleChange} defaultValue={defaultValue} max={10000000} min={min} />
+    </Field>
+  )
+}
+export const ReduceAmount = ({ defaultValue, onChange, max }) => {
+  const handleChange = (value) => {
+    onChange({ reduceAmount: value })
+  }
+  return (
+    <Field label="Reduce Amount">
+      <InputNumerical onChange={handleChange} defaultValue={defaultValue} max={max} min={0} />
     </Field>
   )
 }
@@ -159,7 +191,7 @@ export const VipOnly = ({ onChange, defaultValue }) => {
 
   return (
     <Field label="Vip Only?">
-      <Radio.Group onChange={handleChange} value={value}>
+      <Radio.Group onChange={handleChange} defaultValue={value}>
         <Radio value={true} label="Yes" />
         <Radio value={false} label="No" />
       </Radio.Group>
